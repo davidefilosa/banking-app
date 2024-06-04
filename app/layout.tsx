@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const ibm = IBM_Plex_Serif({
   subsets: ["latin"],
   weight: ["400", "700"],
-  variable: "--ibm",
+  variable: "--font-ibm",
 });
 
 export const metadata: Metadata = {
