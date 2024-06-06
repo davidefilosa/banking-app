@@ -34,7 +34,9 @@ export const Sidebar = ({ user }: Props) => {
               )}
             >
               <div className="relative size-6">{<item.icon />}</div>
-              <p className="max-xl:hidden">{item.label}</p>
+              <p className="max-xl:hidden text-base line-clamp-1">
+                {item.label}
+              </p>
             </Link>
           );
         })}
