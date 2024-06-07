@@ -15,8 +15,13 @@ import Link from "next/link";
 import { sidebarLinks } from "@/constants";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { Footer } from "./footer";
 
-export const MobileNav = () => {
+type Props = {
+  user: User;
+};
+
+export const MobileNav = ({ user }: Props) => {
   const pathname = usePathname();
 
   return (
@@ -25,7 +30,10 @@ export const MobileNav = () => {
         <SheetTrigger asChild>
           <Vault className="size-8 text-blue-500" />
         </SheetTrigger>
-        <SheetContent side={"left"}>
+        <SheetContent
+          side={"left"}
+          className="w-full flex flex-col justify-between"
+        >
           <nav className="flex flex-col gap-4">
             <SheetClose asChild>
               <Link
@@ -56,6 +64,7 @@ export const MobileNav = () => {
               );
             })}
           </nav>
+          <Footer user={user} type="mobile" />
         </SheetContent>
       </Sheet>
     </div>
