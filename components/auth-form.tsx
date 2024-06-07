@@ -10,7 +10,8 @@ import { z } from "zod";
 import { Form } from "./ui/form";
 import { CustomInput } from "./custom-input";
 import { Button } from "./ui/button";
-import { signUp } from "@/lib/actions/user";
+import { signIn, signUp } from "@/lib/actions/user";
+import { useRouter } from "next/navigation";
 
 type Props = {
   type: "sign-in" | "sign-up";
@@ -19,6 +20,7 @@ type Props = {
 export const AuthForm = ({ type }: Props) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const formSchema = authFormSchema(type);
 
@@ -32,11 +34,18 @@ export const AuthForm = ({ type }: Props) => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsLoading(true);
-    console.log("click");
     try {
       if (type === "sign-up") {
         const newUser = await signUp(values);
         setUser(newUser);
+      }
+
+      if (type === "sign-in") {
+        const response = await signIn(values);
+
+        if (response) {
+          router.push("/");
+        }
       }
     } catch (error) {
       console.log(error);
